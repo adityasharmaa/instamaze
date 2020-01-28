@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # insta
 
 A new Flutter project.
@@ -14,3 +15,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# instamaze
+A try at making copy of Instagram, just for learning purpose
+>>>>>>> d51e7f208cca63f946b991b7acbaddbb54ed6d18
