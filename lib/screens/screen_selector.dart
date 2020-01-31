@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:insta/helpers/firebase_auth.dart';
 import 'package:insta/providers/posts_provider.dart';
 import 'package:insta/screens/home.dart';
+import 'package:insta/screens/login_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:insta/helpers/google_sign_in.dart' show googleSignIn;
 
 class ScreenSelector extends StatefulWidget {
   static const route = "/screen_selector";
@@ -19,6 +22,24 @@ class _ScreenSelectorState extends State<ScreenSelector> {
       child: Scaffold(
         appBar: AppBar(
           title: Text("Instamaze"),
+          leading: Icon(Icons.camera),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.send),
+              onPressed: (){},
+            ),
+            IconButton(
+            icon: Icon(Icons.power_settings_new),
+            onPressed: () async {
+              final currentUser = await Auth().getCurrentUser();
+              if (currentUser != null)
+                await Auth().signOut();
+              else
+                await googleSignIn.signOut();
+              Navigator.of(context).pushReplacementNamed(LoginScreen.route);
+            },
+          ),
+          ],
         ),
         body: _screensList[0], //TODO implement multiple screens
         bottomNavigationBar: BottomNavigationBar(

@@ -8,17 +8,54 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:102328743809:android:fa6cd450765f9edbf3da80",
+        "mobilesdk_app_id": "1:102328743809:android:aeeddc648d51cfa3f3da80",
         "android_client_info": {
-          "package_name": "com.example.insta"
+          "package_name": "com.android.insta"
         }
       },
       "oauth_client": [
         {
-          "client_id": "102328743809-uje0iialcreo517a52n7gq5iv76oicfv.apps.googleusercontent.com",
+          "client_id": "102328743809-8qn4g8sschovnuc2sk55l5mojmqun75c.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.insta",
+            "package_name": "com.android.insta",
+            "certificate_hash": "5ba34a864119a4b61f41ea90e85292fcae4d0e51"
+          }
+        },
+        {
+          "client_id": "102328743809-tb8ishjnl5di0pm0g88nkdu730d9k0qc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD140ss5ysgeMaxwcCvEsrNjtkWcFdROPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "102328743809-tb8ishjnl5di0pm0g88nkdu730d9k0qc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102328743809:android:25c470aab9c8960bf3da80",
+        "android_client_info": {
+          "package_name": "com.example.pothole"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "102328743809-0auuf8cbcj1cnmsj8b60lb5g21oe4l9n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pothole",
             "certificate_hash": "5ba34a864119a4b61f41ea90e85292fcae4d0e51"
           }
         },

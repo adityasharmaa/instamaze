@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:insta/models/post_model.dart';
+import 'package:insta/widgets/stories_list.dart';
 
 class Post extends StatelessWidget {
   final PostModel _post;
@@ -10,7 +11,7 @@ class Post extends StatelessWidget {
     final _height = MediaQuery.of(context).size.height;
     return Container(
       width: double.infinity,
-      child: Column(
+      child: _post != null ? Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
@@ -127,13 +128,16 @@ class Post extends StatelessWidget {
             child: InkWell(
               child: Text(
                 _post.time,
-                style: TextStyle(color: Colors.grey[400], fontSize: 10,),
+                style: TextStyle(
+                  color: Colors.grey[400],
+                  fontSize: 10,
+                ),
               ),
             ),
           ),
           SizedBox(height: 20),
         ],
-      ),
+      ) : StoriesList(),
     );
   }
 }

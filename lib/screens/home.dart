@@ -4,7 +4,6 @@ import 'package:insta/widgets/post.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
-  static const route = "/home";
   @override
   Widget build(BuildContext context) {
     final postsData = Provider.of<PostsProvider>(context, listen: false);
@@ -19,8 +18,13 @@ class Home extends StatelessWidget {
           return Center(
             child: Text("Error"),
           );
-        return ListView(
-          children: postsData.homePosts.map((post) => Post(post)).toList()
+        return ListView.builder(
+          itemCount: postsData.homePosts.length + 1,
+          itemBuilder: (_, index) => Column(children: [
+            Post(index == 0 ? null : postsData.homePosts[index - 1]),
+            if (index == 0)
+              Divider(height: 5,),
+          ]),
         );
       },
     );

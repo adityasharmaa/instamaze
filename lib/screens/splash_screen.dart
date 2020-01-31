@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:insta/screens/home.dart';
+import 'package:insta/screens/screen_selector.dart';
 import 'login_screen.dart';
 import '../helpers/firebase_auth.dart';
 
@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
           .getCurrentUser();*/
 
       if (user?.uid != null)
-        Navigator.of(context).pushReplacementNamed(Home.route);
+        Navigator.of(context).pushReplacementNamed(ScreenSelector.route);
       else
         Navigator.of(context).pushReplacementNamed(LoginScreen.route);
     } else
