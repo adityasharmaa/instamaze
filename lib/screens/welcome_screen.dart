@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:insta/providers/current_user_provider.dart';
+import 'package:insta/screens/accounts_suggestion.dart';
 import 'package:insta/screens/change_username_screen.dart';
-import 'package:insta/screens/screen_selector.dart';
 import 'package:insta/widgets/blue_button.dart';
 import 'package:provider/provider.dart';
 
@@ -24,11 +24,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       _isLoading = true;
     });
     try {
-      final response =
-          await Provider.of<CurrentUserProvider>(context, listen: false)
-              .setUsername(username);
+      final response = await Provider.of<CurrentUserProvider>(context, listen: false).setUsername(username);
       if (response.isEmpty)
-        Navigator.of(context).pushReplacementNamed(ScreenSelector.route);
+        Navigator.of(context).pushReplacementNamed(AccountsSuggestionScreen.route);
       else
         _showSnackBar(response);
     } catch (e) {
@@ -52,7 +50,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     final username = _userName(
-        Provider.of<CurrentUserProvider>(context, listen: false).user.email);
+        Provider.of<CurrentUserProvider>(context, listen: false).account.email);
     final _height = MediaQuery.of(context).size.longestSide;
 
     return AbsorbPointer(

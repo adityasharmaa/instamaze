@@ -1,16 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:insta/models/user.dart';
+import 'package:insta/models/account.dart';
 
 class CurrentUserProvider with ChangeNotifier {
-  User _user;
+  Account _account;
 
-  User get user {
-    return _user;
+  Account get account {
+    return _account;
   }
 
-  set setUser(User user) {
-    _user = user;
+  Future<void> getCurrentUser(String userId) async{
+    final response = await Firestore.instance
+          .collection("insta_users")
+          .document(userId).get();
+
+    _account = Account.fromDocumentSnapshot(response);
+    notifyListeners();
+  }
+
+  Future<void> delete(String userId) async{
+    await Firestore.instance
+          .collection("insta_users")
+          .document(userId).delete();
   }
 
   Future<bool> isEmailAlreadyUsed(String email) async {
@@ -35,7 +46,7 @@ class CurrentUserProvider with ChangeNotifier {
         "email": email,
       });
 
-      _user = User(
+      _account = Account(
         id: userId,
         name: name,
         email: email,
@@ -51,11 +62,11 @@ class CurrentUserProvider with ChangeNotifier {
     try {
       await Firestore.instance
           .collection("insta_users")
-          .document(_user.id)
+          .document(_account.id)
           .updateData({
         "dob": dob,
       });
-      _user.dob = dob;
+      _account.dob = dob;
       notifyListeners();
     } catch (e) {
       throw e;
@@ -74,15 +85,28 @@ class CurrentUserProvider with ChangeNotifier {
         
       await Firestore.instance
           .collection("insta_users")
-          .document(_user.id)
+          .document(_account.id)
           .updateData({
         "username": username,
       });
-      _user.username = username;
+      _account.username = username;
       notifyListeners();
     } catch (e) {
       throw e;
     }
     return "";
   }
+
+  void followAccount(String accountId){
+    if(_account.following == null)
+      _account.following = [];
+    _account.following.add(accountId);
+    notifyListeners();
+  }
+
+  void unfollowAccount(String accountId){
+    _account.following.remove(accountId);
+    notifyListeners();
+  }
+
 }

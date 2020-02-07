@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insta/providers/current_user_provider.dart';
 import 'package:insta/providers/posts_provider.dart';
 import 'package:insta/widgets/post.dart';
 import 'package:provider/provider.dart';
@@ -7,8 +8,10 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final postsData = Provider.of<PostsProvider>(context, listen: false);
+    final currentUser = Provider.of<CurrentUserProvider>(context, listen: false);
+
     return FutureBuilder(
-      future: postsData.fetchPosts(),
+      future: postsData.fetchPosts(currentUser.account.following),
       builder: (_, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting)
           return Center(
@@ -23,7 +26,7 @@ class Home extends StatelessWidget {
           itemBuilder: (_, index) => Column(children: [
             Post(index == 0 ? null : postsData.homePosts[index - 1]),
             if (index == 0)
-              Divider(height: 5,),
+              Divider(height: 5)
           ]),
         );
       },

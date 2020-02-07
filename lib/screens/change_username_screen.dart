@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:insta/providers/current_user_provider.dart';
-import 'package:insta/screens/screen_selector.dart';
 import 'package:insta/widgets/blue_button.dart';
 import 'package:insta/widgets/grey_text_field.dart';
 import 'package:provider/provider.dart';
+
+import 'accounts_suggestion.dart';
 
 class ChangeUsernameScreen extends StatefulWidget {
   static const route = "/change_username_screen";
@@ -32,7 +33,7 @@ class _ChangeUsernameScreenState extends State<ChangeUsernameScreen> {
               .setUsername(username);
       if (response.isEmpty) {
         Navigator.of(context).pop();
-        Navigator.of(context).pushReplacementNamed(ScreenSelector.route);
+        Navigator.of(context).pushReplacementNamed(AccountsSuggestionScreen.route);
       } else
         _showSnackBar(response);
     } catch (e) {

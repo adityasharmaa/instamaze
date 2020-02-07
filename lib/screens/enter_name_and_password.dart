@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:insta/helpers/firebase_auth.dart';
 import 'package:insta/providers/current_user_provider.dart';
 import 'package:insta/screens/add_date_of_birth.dart';
+import 'package:insta/screens/login_screen.dart';
 import 'package:insta/widgets/blue_button.dart';
 import 'package:insta/widgets/grey_text_field.dart';
+import 'package:insta/widgets/info_dialog.dart';
 import 'package:provider/provider.dart';
 
 class EnterNameAndPassword extends StatefulWidget {
@@ -66,73 +68,95 @@ class _EnterNameAndPasswordState extends State<EnterNameAndPassword> {
     );
   }
 
+  Future<bool> _willPopCallback() async{
+    return await showDialog(
+      context: context,
+      builder: (_) => InfoDialog(
+        heading: "Discard information?",
+        details: "If you go back now, any information you've entered so far will be discarded.",
+        firstActionLabel: "Discard",
+        secondActionLabel: "Cancel",
+        firstAction: (){
+          Navigator.of(context).pop();
+          Navigator.of(context).pushReplacementNamed(LoginScreen.route);
+        },
+        secondAction: (){
+          Navigator.of(context).pop();
+        },
+      ),
+    ) ?? false;
+  }
+
   @override
   Widget build(BuildContext context) {
     final _height = MediaQuery.of(context).size.longestSide;
-    return AbsorbPointer(
-      absorbing: _isLoading,
-      child: Scaffold(
-        key: _scaffold,
-        body: Stack(
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                Expanded(child: SizedBox()),
-                Text(
-                  "NAME AND PASSWORD",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: GreyTextField(
-                    hint: "Name",
-                    obscured: false,
-                    controller: _nameController,
-                    enabled: true,
+    return WillPopScope(
+      onWillPop: _willPopCallback,
+      child: AbsorbPointer(
+        absorbing: _isLoading,
+        child: Scaffold(
+          key: _scaffold,
+          body: Stack(
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Expanded(child: SizedBox()),
+                  Text(
+                    "NAME AND PASSWORD",
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                ),
-                SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: GreyTextField(
-                    hint: "Password",
-                    obscured: true,
-                    controller: _passwordController,
-                    enabled: true,
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: GreyTextField(
+                      hint: "Name",
+                      obscured: false,
+                      controller: _nameController,
+                      enabled: true,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 5),
-                  child: Row(
-                    children: <Widget>[
-                      Checkbox(
-                        checkColor: Colors.white,
-                        activeColor: Colors.blue,
-                        value: _savePassword,
-                        onChanged: (value) => setState(() {
-                          _savePassword = value;
-                        }),
-                      ),
-                      Text(
-                        "Save Password",
-                        style: TextStyle(fontSize: 12, color: Colors.grey[400]),
-                      ),
-                    ],
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: GreyTextField(
+                      hint: "Password",
+                      obscured: true,
+                      controller: _passwordController,
+                      enabled: true,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: BlueButton(
-                    label: "Continue",
-                    isLoading: _isLoading,
-                    action: _createAccount,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: Row(
+                      children: <Widget>[
+                        Checkbox(
+                          checkColor: Colors.white,
+                          activeColor: Colors.blue,
+                          value: _savePassword,
+                          onChanged: (value) => setState(() {
+                            _savePassword = value;
+                          }),
+                        ),
+                        Text(
+                          "Save Password",
+                          style:
+                              TextStyle(fontSize: 12, color: Colors.grey[400]),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Expanded(child: SizedBox()),
-              ],
-            ),
-            Positioned(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: BlueButton(
+                      label: "Continue",
+                      isLoading: _isLoading,
+                      action: _createAccount,
+                    ),
+                  ),
+                  Expanded(child: SizedBox()),
+                ],
+              ),
+              Positioned(
                 child: Container(
                   height: _isLoading ? _height : 0,
                   color: _isLoading
@@ -140,7 +164,8 @@ class _EnterNameAndPasswordState extends State<EnterNameAndPassword> {
                       : Colors.transparent,
                 ),
               ),
-          ],
+            ],
+          ),
         ),
       ),
     );

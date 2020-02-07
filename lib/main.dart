@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:insta/providers/current_user_provider.dart';
-import 'package:insta/screens/change_username_screen.dart';
-import 'package:insta/screens/welcome_screen.dart';
+import 'package:insta/providers/post_creator_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/enter_name_and_password.dart';
@@ -13,6 +11,11 @@ import 'screens/login_screen.dart';
 import 'screens/screen_selector.dart';
 import 'screens/sign_up_screen.dart';
 import 'screens/splash_screen.dart';
+import 'providers/accounts_suggestion_provider.dart';
+import 'providers/current_user_provider.dart';
+import 'screens/accounts_suggestion.dart';
+import 'screens/change_username_screen.dart';
+import 'screens/welcome_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,6 +32,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: CurrentUserProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: AccountsSuggestionProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: PostCreatorProvider(),
         ),
       ],
       child: MaterialApp(
@@ -47,6 +56,7 @@ class MyApp extends StatelessWidget {
           AddDateOfBirth.route: (_) => AddDateOfBirth(),
           WelcomeScreen.route: (_) => WelcomeScreen(),
           ChangeUsernameScreen.route: (_) => ChangeUsernameScreen(),
+          AccountsSuggestionScreen.route: (_) => AccountsSuggestionScreen(),
         },
       ),
     );

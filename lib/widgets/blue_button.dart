@@ -4,12 +4,16 @@ class BlueButton extends StatelessWidget {
   final String label;
   final Function action;
   final bool isLoading;
+  final bool disable;
 
   BlueButton({
     @required this.label,
     @required this.action,
     this.isLoading = false,
-  });
+    this.disable = false,
+  }){
+    print("button: $disable");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +26,25 @@ class BlueButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           color: Colors.blue,
         ),
-        child: Center(
-          child: isLoading ? CircularProgressIndicator() : Text(
-            label,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
+        child: Stack(
+          children: <Widget>[
+            Center(
+              child: isLoading
+                  ? CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    )
+                  : Text(
+                      label,
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+            ),
+            if(disable)
+              Positioned.fill(child: Container(color: Colors.white54)),
+          ],
         ),
       ),
-      onTap: action,
+      onTap: disable ? null : action,
     );
   }
 }
