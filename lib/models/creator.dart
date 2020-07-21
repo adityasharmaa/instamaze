@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class PostCreator{
+class Creator{
   final String username, image;
 
-  PostCreator({
+  Creator({
     this.image,
     this.username,
   });
 
-  factory PostCreator.fromDocumentSnapshot(DocumentSnapshot snapshot){
-    return PostCreator(
+  factory Creator.fromDocumentSnapshot(DocumentSnapshot snapshot){
+    return Creator(
       username: snapshot.data["username"],
       image: snapshot.data["image"],
     );

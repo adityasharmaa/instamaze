@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:insta/providers/comments_provider.dart';
 import 'package:insta/providers/post_creator_provider.dart';
+import 'package:insta/screens/edit_personal_information.dart';
+import 'package:insta/screens/pick_images_screen.dart';
+import 'package:insta/screens/comments_screen.dart';
+import 'package:insta/screens/multi_image_picker_example.dart';
+import 'package:insta/screens/prepare_post.dart';
 import 'package:provider/provider.dart';
 
+import 'providers/comment_creator_provider.dart';
 import 'screens/enter_name_and_password.dart';
 import 'providers/posts_provider.dart';
 import 'providers/stories_provider.dart';
@@ -39,8 +46,15 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: PostCreatorProvider(),
         ),
+        ChangeNotifierProvider.value(
+          value: CommentsProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: CommentCreatorProvider(),
+        ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Instamaze',
         theme: ThemeData(
           primaryColor: Colors.white,
@@ -57,6 +71,11 @@ class MyApp extends StatelessWidget {
           WelcomeScreen.route: (_) => WelcomeScreen(),
           ChangeUsernameScreen.route: (_) => ChangeUsernameScreen(),
           AccountsSuggestionScreen.route: (_) => AccountsSuggestionScreen(),
+          CommentsScreen.route: (_) => CommentsScreen(),
+          PickImagesScreen.route: (_) => PickImagesScreen(),
+          PreparePost.route: (_) => PreparePost(),
+          MultipleImagePicker.route: (_) => MultipleImagePicker(),
+          EditPersonalInformation.route: (_) => EditPersonalInformation(),
         },
       ),
     );

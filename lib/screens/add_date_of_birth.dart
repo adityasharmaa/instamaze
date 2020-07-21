@@ -56,23 +56,25 @@ class _AddDateOfBirthState extends State<AddDateOfBirth> {
     );
   }
 
-  Future<bool> _willPopCallback() async{
+  Future<bool> _willPopCallback() async {
     return await showDialog(
-      context: context,
-      builder: (_) => InfoDialog(
-        heading: "Discard information?",
-        details: "If you go back now, any information you've entered so far will be discarded.",
-        firstActionLabel: "Discard",
-        secondActionLabel: "Cancel",
-        firstAction: (){
-          Navigator.of(context).pop();
-          Navigator.of(context).pushReplacementNamed(LoginScreen.route);
-        },
-        secondAction: (){
-          Navigator.of(context).pop();
-        },
-      ),
-    ) ?? false;
+          context: context,
+          builder: (_) => InfoDialog(
+            heading: "Discard information?",
+            details:
+                "If you go back now, any information you've entered so far will be discarded.",
+            firstActionLabel: "Discard",
+            secondActionLabel: "Cancel",
+            firstAction: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pushReplacementNamed(LoginScreen.route);
+            },
+            secondAction: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ) ??
+        false;
   }
 
   @override
@@ -131,11 +133,13 @@ class _AddDateOfBirthState extends State<AddDateOfBirth> {
                         Expanded(child: SizedBox()),
                         Padding(
                           padding: const EdgeInsets.only(right: 20),
-                          child: Text("${_years.toInt()} years",
-                              style: TextStyle(
-                                  color: _years.toInt() > 12
-                                      ? Colors.grey
-                                      : Colors.red)),
+                          child: Text(
+                            "${_years.toInt()} years",
+                            style: TextStyle(
+                                color: _years.toInt() > 12
+                                    ? Colors.grey
+                                    : Colors.red),
+                          ),
                         ),
                       ],
                     ),

@@ -10,11 +10,27 @@ class Converter {
     return "$count";
   }
 
-  static String timeSince(String time) {
+  static String timeSince(String time, {bool isPost = false}) {
     final duration = DateTime.now().difference(DateTime.parse(time));
+    int seconds = duration.inSeconds;
+    int minutes = duration.inMinutes;
+    int hours = duration.inHours;
     int days = duration.inDays;
-    if (days <= 7) return "$days";
-    return DateFormat.yMMMMd().format(DateTime.parse(time));
+    int weeks = days ~/ 7;
+
+    if(weeks > 0)
+      return isPost ? DateFormat.yMMMMd().format(DateTime.parse(time)) : "$weeks" + "w";
+
+    if(days > 0)
+      return isPost ? "$days days" : "$days" + "d";
+
+    if(hours > 0)
+      return isPost ? "$hours hours" : "$hours" + "h";
+
+    if(minutes > 0)
+      return isPost ? "$minutes minutes" : "$minutes" + "m";
+
+    return isPost ? "$seconds seconds" : "$seconds" + "s";
   }
 
   static String likes(int likes) {

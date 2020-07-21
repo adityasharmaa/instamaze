@@ -70,7 +70,7 @@ class Auth implements BaseAuth {
     final Map<String, dynamic> userData = {
       "id": userId,
       "full_name": newUser.name,
-      "user_name": newUser.userName,
+      "user_name": newUser.username,
       //"email": newUser.email,
       "image_url": "NA",
     };

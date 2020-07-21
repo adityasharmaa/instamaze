@@ -11,9 +11,7 @@ class BlueButton extends StatelessWidget {
     @required this.action,
     this.isLoading = false,
     this.disable = false,
-  }){
-    print("button: $disable");
-  }
+  });
 
   @override
   Widget build(BuildContext context) {

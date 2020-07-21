@@ -27,14 +27,15 @@ class Account {
     return Account(
       name: snapshot.data["name"],
       username: snapshot.data["username"],
-      email: snapshot.data["email"],
-      id: snapshot.documentID,
-      dob: snapshot.data["dob"],
-      bio: snapshot.data["bio"],
-      followers: snapshot.data["followers"] !=null ? (snapshot.data["followers"] as List<dynamic>).map((follower) => follower.toString()).toList() : null,
-      following: snapshot.data["following"] != null ? (snapshot.data["following"] as List<dynamic>).map((follower) => follower.toString()).toList() : null,
-      gender: snapshot.data["gender"],
-      image: snapshot.data["image"],
+      email: snapshot.data["email"] ?? "",
+      id: snapshot.documentID ?? "",
+      dob: snapshot.data["dob"] ?? "",
+      bio: snapshot.data["bio"] ?? "",
+      followers: snapshot.data["followers"] !=null ? (snapshot.data["followers"] as List<dynamic>).map((follower) => follower.toString()).toList() : [],
+      following: snapshot.data["following"] != null ? (snapshot.data["following"] as List<dynamic>).map((follower) => follower.toString()).toList() : [],
+      gender: snapshot.data["gender"] ?? "",
+      image: snapshot.data["image"] ?? "",
+      posts: [],
     );
   }
 }

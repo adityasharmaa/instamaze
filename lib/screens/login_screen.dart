@@ -6,13 +6,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:insta/helpers/firebase_auth.dart';
-import 'package:insta/screens/edit_profile.dart';
+import 'package:insta/providers/current_user_provider.dart';
 import 'package:insta/helpers/google_sign_in.dart' show googleSignIn;
 import 'package:insta/screens/screen_selector.dart';
 import 'package:insta/screens/sign_up_screen.dart';
 import 'package:insta/widgets/blue_button.dart';
 import 'package:insta/widgets/grey_text_field.dart';
 import 'package:insta/widgets/interactive_text.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   static const route = "/login_screen";
@@ -75,6 +76,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       _currentUser = await _auth.signIn(email, password);
+      final cUser = Provider.of<CurrentUserProvider>(context, listen: false);
+      await cUser.getCurrentUser(_currentUser.uid);
       if (_currentUser.uid.length > 0)
         Navigator.of(context).pushReplacementNamed(ScreenSelector.route);
       else

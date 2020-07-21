@@ -14,7 +14,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   flutter:
@@ -27,10 +27,12 @@ dependencies:
   firebase_storage: ^3.1.1
   cloud_firestore: ^0.12.10+2
   carousel_slider: ^1.4.1
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  path: ^1.6.4
+  path_provider: ^1.6.0
   cupertino_icons: ^0.1.2
+  permission_handler: ^4.2.0+hotfix.3
+  image_picker: ^0.6.4
+  multi_image_picker: ^4.6.7
 
 dev_dependencies:
   flutter_test:
